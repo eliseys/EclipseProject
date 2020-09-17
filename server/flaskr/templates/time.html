@@ -8,11 +8,62 @@
     </style>
   </head>
   <body>
- 
-    <!-- <p id="sample">{{ time }}</p> -->
-    <p id="sample"></p>
 
-   
+
+
+
+    <table>
+      <tr>
+	<td>Latitude</td> <td id = "latitude"></td>
+      </tr>
+      <tr>
+	<td>Longitude</td> <td id = "longitude"></td>
+      </tr>
+      <tr>
+	<td>Altitude, m</td> <td id = "altitude_m"></td>
+      </tr>
+    </table>
+
+        
+    <table>
+      <tr>
+	<td>Now</td> <td id = "date_now"></td> <td id = "time_now"></td>
+      </tr>
+      <tr>
+	<td>C1</td> <td id = "date_c1"></td> <td id = "time_c1"></td> <td id = "countdown_c1"></td>
+      </tr>
+      <tr>
+	<td>C2</td> <td id = "date_c2"></td> <td id = "time_c2"></td> <td id = "countdown_c2"></td>
+      </tr>
+      <tr>
+	<td>M</td> <td id = "date_mid"></td> <td id = "time_mid"></td> <td id = "countdown_mid"></td>
+      </tr>
+      <tr>
+	<td>C3</td> <td id = "date_c3"></td> <td id = "time_c3"></td> <td id = "countdown_c3"></td>
+      </tr>
+      <tr>
+	<td>C4</td> <td id = "date_c4"></td> <td id = "time_c4"></td> <td id = "countdown_c4"></td>
+      </tr>
+    </table>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- <p id="times"></p> -->
+
+    
     <script src="{{url_for('static', filename='app.js')}}"></script>
   </body>
 </html>

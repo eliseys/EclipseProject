@@ -1,28 +1,13 @@
 import os
-import time
+from datetime import datetime, timedelta
 import numpy as np
-from skyfield.api import load
-from skyfield.api import Topos
-from . import eclipseTimes
+import math
+
+import ujson
+
 from flask import Flask, render_template, request, jsonify, after_this_request
 
 
-planets = load('de421.bsp')
-r_moon = 1737.4 #km
-r_sun = 696000.0 #km
-
-p = Topos('39.88836 S', '69.87577 W', elevation_m=449)
-date = load.timescale().utc(2020, 12, 14)
-
-c1 = eclipseTimes.t_c1(date, p, r_moon, r_sun, 1e-5).utc
-c2 = eclipseTimes.t_c2(date, p, r_moon, r_sun, 1e-5).utc
-mid = eclipseTimes.t_center(date, p, 1e-4).utc
-c3 = eclipseTimes.t_c3(date, p, r_moon, r_sun, 1e-5).utc
-c4 = eclipseTimes.t_c4(date, p, r_moon, r_sun, 1e-5).utc
-
-#print("***********", type(c1.year), c1.year)
-
-# eclipseCircumstances = {'C1':c1[0], 'C2':c2[0], 'MID':mid[0], 'C3':c3[0], 'C4':c4[0]}
 
 def create_app(test_config=None):
     # create and configure the app
@@ -61,19 +46,39 @@ def create_app(test_config=None):
 
         #eclipseCircumstances = {'C1':c1, 'C2':c2, 'MID':mid, 'C3':c3, 'C4':c4}
 
+
+        with open('/home/dmitrykolesnikov/CODE/EclipseProject/skyfield/ec.json', "r") as jf:
+            ec = ujson.load(jf)
+
+        now = datetime.now()
+
+        ec['now'] = {'year': int(now.year), 'month': int(now.month), 'day': int(now.day), 'hour': int(now.hour), 'minute': int(now.minute), 'second': float(now.second)}
         
-        EC = {'C1': {'year': float(c1.year), 'month': float(c1.month), 'day': float(c1.day), 'hour': float(c1.hour), 'minute': float(c1.minute), 'second': float(c1.second)},
-              'C2': {'year': float(c2.year), 'month': float(c2.month), 'day': float(c2.day), 'hour': float(c2.hour), 'minute': float(c2.minute), 'second': float(c2.second)},
-              'mid': {'year': float(mid.year), 'month': float(mid.month), 'day': float(mid.day), 'hour': float(mid.hour), 'minute': float(mid.minute), 'second': float(mid.second)},
-              'C3': {'year': float(c3.year), 'month': float(c3.month), 'day': float(c3.day), 'hour': float(c3.hour), 'minute': float(c3.minute), 'second': float(c3.second)},
-              'C4': {'year': float(c4.year), 'month': float(c4.month), 'day': float(c4.day), 'hour': float(c4.hour), 'minute': float(c4.minute), 'second': float(c4.second)},
+        c1 = datetime(ec['c1']['year'], ec['c1']['month'], ec['c1']['day'], ec['c1']['hour'], ec['c1']['minute'], int(math.floor(ec['c1']['second'])), int((ec['c1']['second']%1)*1e6))
+        c2 = datetime(ec['c2']['year'], ec['c2']['month'], ec['c2']['day'], ec['c2']['hour'], ec['c2']['minute'], int(math.floor(ec['c2']['second'])), int((ec['c2']['second']%1)*1e6))
+        mid = datetime(ec['mid']['year'], ec['mid']['month'], ec['mid']['day'], ec['mid']['hour'], ec['mid']['minute'], int(math.floor(ec['mid']['second'])), int((ec['mid']['second']%1)*1e6))
+        c3 = datetime(ec['c3']['year'], ec['c3']['month'], ec['c3']['day'], ec['c3']['hour'], ec['c3']['minute'], int(math.floor(ec['c3']['second'])), int((ec['c3']['second']%1)*1e6))
+        c4 = datetime(ec['c4']['year'], ec['c4']['month'], ec['c4']['day'], ec['c4']['hour'], ec['c4']['minute'], int(math.floor(ec['c4']['second'])), int((ec['c4']['second']%1)*1e6))
+        
+        ec['countdown_c1'] = {'days': (c1-now).days,
+                              'hours': (c1-now).seconds//3600,
+                              'minutes': ((c1-now).seconds % 3600) // 60,
+                              'seconds': ((c1-now).seconds % 60) + ((c1-now).microseconds/1e6)
         }
-        return jsonify(EC)
+        # ec['countdown_c2'] = now-c2
+        # ec['countdown_mid'] = now-mid
+        # ec['countdown_c3'] = now-c3
+        # ec['countdown_c4'] = now-c4
+
+        print("******",  ec['countdown_c1'])
+        
+        
+        return jsonify(ec)
 
     
     @app.route('/time')
     def hello():
-        return render_template('time.html', time=time.strftime("%c"))
+        return render_template('time.html')
         
         
     return app
