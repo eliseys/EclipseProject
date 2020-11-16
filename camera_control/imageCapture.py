@@ -3,7 +3,32 @@ from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
 
+import schedule
 
+
+
+
+def job_that_executes_once():
+
+    print("TEST SCHEDULE", datetime.now())
+    
+    return schedule.CancelJob
+
+
+
+#job_that_executes_once()
+
+schedule.every().day.at('17:36:40').do(job_that_executes_once)
+
+while True:
+    schedule.run_pending()
+
+
+
+
+
+
+#sleep(60)
 
 
 detect_cameras = ["--auto-detect"]
@@ -141,7 +166,7 @@ drivemode_high_speed = ["--set-config", "drivemode" + "=1"]
 # shutterspeed
 
 
-t = 0.25
+#t = 0.25
 
 
 #gp("--set-config", "output=1", "--wait-event", "1.0s", "--capture-image", "-I 10s", "-F 5", "--set-config", "output=0")
@@ -154,12 +179,12 @@ t = 0.25
 
 #gp("--trigger-image", "--wait-event", "2.0s", "--trigger-image")
 
-gp("--set-config", "drivemode=1", "--set-config", "output=1",\
-   "--set-config", "shutterspeed=1/4000", "--set-config", "eosremoterelease=5", "--wait-event", "4s", "--set-config", "eosremoterelease=4",\
-   "--wait-event", "2s",\
-   "--set-config", "aeb=3",\
-   "--set-config", "shutterspeed=1/1000", "--set-config", "eosremoterelease=5", "--wait-event", "2s", "--set-config", "eosremoterelease=4",\
-   "--set-config", "shutterspeed=1/8", "--set-config", "eosremoterelease=5", "--wait-event", "2s", "--set-config", "eosremoterelease=4")
+# gp("--set-config", "drivemode=1", "--set-config", "output=1",\
+#    "--set-config", "shutterspeed=1/4000", "--set-config", "eosremoterelease=5", "--wait-event", "4s", "--set-config", "eosremoterelease=4",\
+#    "--wait-event", "2s",\
+#    "--set-config", "aeb=3",\
+#    "--set-config", "shutterspeed=1/1000", "--set-config", "eosremoterelease=5", "--wait-event", "2s", "--set-config", "eosremoterelease=4",\
+#    "--set-config", "shutterspeed=1/8", "--set-config", "eosremoterelease=5", "--wait-event", "2s", "--set-config", "eosremoterelease=4")
 
 #11.020 total
 
