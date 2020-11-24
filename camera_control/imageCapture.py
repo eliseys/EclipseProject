@@ -8,27 +8,37 @@ import schedule
 
 
 
-def job_that_executes_once():
+def job1():
 
-    print("TEST SCHEDULE", datetime.now())
-    
+    for i in range(20):
+        print("TEST SCHEDULE 1", datetime.now())
+        sleep(2)
+        
     return schedule.CancelJob
 
+
+def job2():
+    for i in range(20):
+        print("TEST SCHEDULE 2", datetime.now())
+        sleep(2)
+        
+    return schedule.CancelJob
 
 
 #job_that_executes_once()
 
-schedule.every().day.at('17:36:40').do(job_that_executes_once)
+schedule.every().day.at('11:11:30').do(job1)
+schedule.every().day.at('11:11:35').do(job2)
 
 while True:
     schedule.run_pending()
 
 
 
+# www.astropix.com
+# Don't take any exposures longer than 1/30th of a second in the 10 seconds after second contact or in the 10 seconds before third contact.
 
 
-
-#sleep(60)
 
 
 detect_cameras = ["--auto-detect"]
