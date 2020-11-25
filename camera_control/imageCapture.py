@@ -15,6 +15,13 @@ import schedule
 #     return schedule.CancelJob
 
 
+def job2():
+    for i in range(20):
+        print("TEST SCHEDULE 2", datetime.now())
+        sleep(2)
+        
+    return schedule.CancelJob
+
 
 # #job_that_executes_once()
 
@@ -24,6 +31,9 @@ import schedule
 #     schedule.run_pending()
 
 
+
+# www.astropix.com
+# Don't take any exposures longer than 1/30th of a second in the 10 seconds after second contact or in the 10 seconds before third contact.
 
 # if camera busy
 # kill output of the following
