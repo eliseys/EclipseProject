@@ -33,51 +33,51 @@ import schedule
 # gp("--auto-detect")
 
 
-# settings
+# # settings
 
-gp("--set-config", "capturetarget=1") # Capture Target Memory card
-print(gp("--get-config", "capturetarget"))
+# gp("--set-config", "capturetarget=1") # Capture Target Memory card
+# print(gp("--get-config", "capturetarget"))
 
-# imgsettings
+# # imgsettings
 
-gp("--set-config", "imageformat=RAW") # Image Format 
-print(gp("--get-config", "imageformat"))
-gp("--set-config", "imageformatsd=RAW") # Image Format SD
-print(gp("--get-config", "imageformat"))
-gp("--set-config", "imageformatcf=RAW") # Image Format CF
-print(gp("--get-config", "imageformat"))
+# gp("--set-config", "imageformat=RAW") # Image Format 
+# print(gp("--get-config", "imageformat"))
+# gp("--set-config", "imageformatsd=RAW") # Image Format SD
+# print(gp("--get-config", "imageformat"))
+# gp("--set-config", "imageformatcf=RAW") # Image Format CF
+# print(gp("--get-config", "imageformat"))
 
-gp("--set-config", "iso=100") # ISO
-print(gp("--get-config", "iso"))
+# gp("--set-config", "iso=100") # ISO
+# print(gp("--get-config", "iso"))
 
-gp("--set-config", "whitebalance=Daylight") # WhiteBalance
-print(gp("--get-config", "whitebalance"))
+# gp("--set-config", "whitebalance=Daylight") # WhiteBalance
+# print(gp("--get-config", "whitebalance"))
 
-# capturesettings
+# # capturesettings
 
-gp("--set-config", "exposurecompensation=0") # Exposure Compensation
-print(gp("--get-config", "exposurecompensation"))
+# gp("--set-config", "exposurecompensation=0") # Exposure Compensation
+# print(gp("--get-config", "exposurecompensation"))
 
-gp("--set-config", "highisonr=2") # High ISO Noise Reduction (2=off)
-print(gp("--get-config", "highisonr"))
+# gp("--set-config", "highisonr=2") # High ISO Noise Reduction (2=off)
+# print(gp("--get-config", "highisonr"))
 
-gp("--set-config", "drivemode=1") # Drive Mode Continuous high speed
-print(gp("--get-config", "drivemode"))
+# gp("--set-config", "drivemode=1") # Drive Mode Continuous high speed
+# print(gp("--get-config", "drivemode"))
 
-gp("--set-config", "drivemode=2") # Drive Mode Continuous low speed
-print(gp("--get-config", "drivemode"))
+# gp("--set-config", "drivemode=2") # Drive Mode Continuous low speed
+# print(gp("--get-config", "drivemode"))
 
-gp("--set-config", "picturestyle=Neutral") # Picture Style
-print(gp("--get-config", "picturestyle"))
+# gp("--set-config", "picturestyle=Neutral") # Picture Style
+# print(gp("--get-config", "picturestyle"))
 
-#gp("--set-config", "aperture") # Aperture
-print(gp("--get-config", "aperture"))
+# #gp("--set-config", "aperture") # Aperture
+# print(gp("--get-config", "aperture"))
 
-gp("--set-config", "shutterspeed") # Shutter Speed
-print(gp("--get-config", "shutterspeed"))
+# gp("--set-config", "shutterspeed='1/2'") # Shutter Speed
+# print(gp("--get-config", "shutterspeed"))
 
-gp("--set-config", "aeb=0") # Auto Exposure Bracketing
-print(gp("--get-config", "aeb"))
+# gp("--set-config", "aeb=0") # Auto Exposure Bracketing
+# print(gp("--get-config", "aeb"))
 
 
 
@@ -85,29 +85,47 @@ print(gp("--get-config", "aeb"))
 #######################################
 
 
+# gp("--set-config", "aeb=0")
+#gp("--set-config", "shutterspeed='1/4'")
+
+
+gp("--set-config", "viewfinder=1",
+   "--wait-event=1s",
+   "--set-config", "shutterspeed=1/1000",
+   "--set-config", "eosremoterelease=5")
+
+sleep(3)
+
+gp("--set-config", "shutterspeed=1/1000",
+   "--set-config", "eosremoterelease=5")
+
+   
+   # "--wait-event=2s",
+   # "--set-config", "eosremoterelease=4",
+   # "--set-config", "shutterspeed=1/1000",
+   # "--set-config", "eosremoterelease=5",
+   # "--wait-event=3s",   
+   # "--set-config", "eosremoterelease=4",
+   # "--set-config", "shutterspeed=0.5",
+   # "--set-config", "eosremoterelease=5")
 
 
 
+# gp("--set-config", "output=0")
+
+
+
+
+
+
+
+#######################################
 
 
 #burst_shooting = ["--set-config", "eosremoterelease" + "=2", "--wait-event" + time, "--set-config", "eosremoterelease" + "=4"]
 
 #burst_shooting_start = ["--set-config", "eosremoterelease" + "=5", "--wait-event" + "=5"] # Immediate
 
-burst_shooting_start = ["--set-config", "eosremoterelease" + "=5"] # Immediate
-#burst_shooting_start = ["--set-config", "eosremoterelease" + "=2"] # Press Full
-
-burst_shooting_stop = ["--set-config", "eosremoterelease" + "=4"]
-
-
-
-liveview = ["--set-config", "output" + "=1"]
-
-liveview_off = ["--set-config", "output" + "=0"]
-
-
-remoterelease = ["--set-config", "eosremoterelease" + "=5"]
-remoterelease_press_full = ["--set-config", "eosremoterelease" + "=2"]
 
 
 
