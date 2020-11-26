@@ -15,15 +15,6 @@ import schedule
 #     return schedule.CancelJob
 
 
-def job2():
-    for i in range(20):
-        print("TEST SCHEDULE 2", datetime.now())
-        sleep(2)
-        
-    return schedule.CancelJob
-
-
-# #job_that_executes_once()
 
 # schedule.every().day.at('17:36:40').do(job_that_executes_once)
 
@@ -35,12 +26,24 @@ def job2():
 # www.astropix.com
 # Don't take any exposures longer than 1/30th of a second in the 10 seconds after second contact or in the 10 seconds before third contact.
 
+
+# If you connect more than one camera to the PC, you can control them independently from gPhoto2. The gphoto2 --auto-detect command provides a list of the detected cameras. You can use the displayed name to control the camera with:
+# gphoto2 --camera="displayed_name"  --capture-image-and-download
+# If you open a separate terminal window for each camera and record the image in separate directories, you can get a parallel series of frames from each camera. Figure 3 shows the process.
+
+
+
+# Если для параметра [52: Автоотключение] выбрано значение [Запрещено], то съемка в режиме
+# Live View прекратится автоматически через 30 минут (питание камеры будет включено).
+
+
 # if camera busy
 # kill output of the following
 # ps aux | grep gphoto
 
 
 # gp("--auto-detect")
+
 
 
 # settings
@@ -90,9 +93,10 @@ gp("--set-config", "aeb=0") # Auto Exposure Bracketing
 print(gp("--get-config", "aeb"))
 
 
-
-
 #######################################
+
+
+
 
 
 
