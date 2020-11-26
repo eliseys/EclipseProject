@@ -5,21 +5,25 @@ import signal, os, subprocess
 
 import schedule
 
+def job_that_executes_once():
+
+    #print("TEST SCHEDULE", datetime.now())
+    print(datetime.now())
+    subprocess.call("./test.sh", shell=True)
+
+    #return schedule.CancelJob
+    return 0
+
+
+schedule.every().day.at('15:07:10').do(job_that_executes_once)
+schedule.every().day.at('15:07:15').do(job_that_executes_once)
+schedule.every().day.at('15:07:20').do(job_that_executes_once)
 
 
 
-# def job_that_executes_once():
 
-#     print("TEST SCHEDULE", datetime.now())
-    
-#     return schedule.CancelJob
-
-
-
-# schedule.every().day.at('17:36:40').do(job_that_executes_once)
-
-# while True:
-#     schedule.run_pending()
+while True:
+    schedule.run_pending()
 
 
 
@@ -103,15 +107,15 @@ import schedule
 #gp("--set-config", "shutterspeed='1/4'")
 
 
-gp("--set-config", "viewfinder=1",
-   "--wait-event=1s",
-   "--set-config", "shutterspeed=1/1000",
-   "--set-config", "eosremoterelease=5")
+# gp("--set-config", "viewfinder=1",
+#    "--wait-event=1s",
+#    "--set-config", "shutterspeed=1/1000",
+#    "--set-config", "eosremoterelease=5")
 
-sleep(3)
+# sleep(3)
 
-gp("--set-config", "shutterspeed=1/1000",
-   "--set-config", "eosremoterelease=5")
+# gp("--set-config", "shutterspeed=1/1000",
+#    "--set-config", "eosremoterelease=5")
 
    
    # "--wait-event=2s",
