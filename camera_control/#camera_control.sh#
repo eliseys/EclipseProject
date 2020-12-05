@@ -32,7 +32,6 @@ gphoto2 \
     --set-config eosremoterelease=5 \
     --wait-event 1300ms \
     --set-config eosremoterelease=4 \
-    --set-config eosremoterelease=5 \    
     # --wait-event 1300ms \
     # --set-config eosremoterelease=4 \
     # --set-config eosremoterelease=5 \

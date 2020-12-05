@@ -1,0 +1,30 @@
+#!/bin/bash
+
+gphoto2 \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+gphoto2 \
+    --set-config drivemode=2 \
+    --set-config shutterspeed=1/1000 \
+    --set-config eosremoterelease=5 \
+    --wait-event 1300ms \
+    --set-config eosremoterelease=4 \
+    --set-config eosremoterelease=5 \
+    --wait-event 1300ms \
+    --set-config eosremoterelease=4 \
+    --set-config eosremoterelease=5 \
+ 

@@ -22,12 +22,17 @@ def sum_bracket(n_0, n):
 
 
 
-n = 2
+N = 7
 
+n = 0
 
-n_0 = n - 6
+burst_gap = 1.0/5.0
+
+n_0 = n - (N-1)
 
 bracket(n_0, n)
 
-print("Corrected summa", (sum_bracket(n_0, n)+7*0.1)*1.25)
+
+
+print("Corrected summa", (sum_bracket(n_0, n)+N*burst_gap)*1.25)
 print("Exposure time", sum_bracket(n_0, n))
