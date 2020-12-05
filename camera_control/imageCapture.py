@@ -2,28 +2,62 @@ from time import sleep
 from datetime import datetime
 from sh import gphoto2 as gp
 import signal, os, subprocess
-
 import schedule
 
-def job_that_executes_once():
+ 
+
+import vlc
+p = vlc.MediaPlayer("beep-09.mp3")
+p.play()
+
+sleep(5)
+
+#p.stop()
+
+
+
+
+
+
+def job1():
 
     #print("TEST SCHEDULE", datetime.now())
     print(datetime.now())
-    subprocess.call("./test.sh", shell=True)
+    subprocess.call("./test1.sh", shell=True)
 
     #return schedule.CancelJob
     return 0
 
 
-schedule.every().day.at('15:07:10').do(job_that_executes_once)
-schedule.every().day.at('15:07:15').do(job_that_executes_once)
-schedule.every().day.at('15:07:20').do(job_that_executes_once)
+
+
+def job2():
+
+    #print("TEST SCHEDULE", datetime.now())
+    print(datetime.now())
+    subprocess.call("./test2.sh", shell=True)
+
+    #return schedule.CancelJob
+    return 0
 
 
 
 
-while True:
-    schedule.run_pending()
+
+
+# schedule.every().day.at('15:07:10').do(job_that_executes_once)
+# schedule.every().day.at('15:07:15').do(job_that_executes_once)
+
+# schedule.every().day.at('15:07:20').do(job_that_executes_once)
+
+
+
+
+# while True:
+#     schedule.run_pending()
+
+
+
 
 
 
