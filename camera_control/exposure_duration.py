@@ -24,7 +24,7 @@ def sum_bracket(n_0, n):
 
 N = 7
 
-n = 0
+n = -6
 
 burst_gap = 1.0/5.0
 

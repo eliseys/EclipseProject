@@ -1,43 +1,125 @@
 #!/bin/bash
 
 gphoto2 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
-    --set-config shutterspeed=1/8 \
-    --set-config eosremoterelease=5 \
-    --wait-event 5000ms \
-    --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config capturetarget=1 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/8 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 5000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config capturetarget=1 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \
+    --camera='USB PTP Class Camera' --set-config shutterspeed=1/500 \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=5 \
+    --camera='USB PTP Class Camera' --wait-event 2000ms \
+    --camera='USB PTP Class Camera' --set-config eosremoterelease=4 \

@@ -38,8 +38,10 @@ c4 = eclipseTimes.t_c4(date, p, ephem, r_moon, r_sun, accuracy_s).utc
 
 
 
+utc_delta = 3
+
 def tuple_to_json(c):
-    return {'year': int(c[0]), 'month': int(c[1]), 'day': int(c[2]), 'hour': int(c[3]), 'minute': int(c[4]), 'second': float(c[5])}
+    return {'year': int(c[0]), 'month': int(c[1]), 'day': int(c[2]), 'hour': int(c[3])-utc_delta, 'minute': int(c[4]), 'second': float(c[5])}
 
 ec['c1'] = tuple_to_json(c1),
 ec['c2'] = tuple_to_json(c2),

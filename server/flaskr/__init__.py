@@ -8,7 +8,6 @@ import ujson
 from flask import Flask, render_template, request, jsonify, after_this_request
 
 
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -50,8 +49,12 @@ def create_app(test_config=None):
         with open('/home/dmitrykolesnikov/CODE/EclipseProject/skyfield/ec.json', "r") as jf:
             ec = ujson.load(jf)
 
-        now = datetime.utcnow() #+ timedelta(days=84, hours=23, minutes=33)
 
+
+        delta_utc = 3    
+        now = datetime.utcnow() - timedelta(hours=delta_utc)
+        
+        
         ec['now'] = {'year': int(now.year), 'month': int(now.month), 'day': int(now.day), 'hour': int(now.hour), 'minute': int(now.minute), 'second': float(now.second + now.microsecond*1e-6)}
 
         #print('********', ec['now'])

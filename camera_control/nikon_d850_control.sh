@@ -1,30 +1,31 @@
 #!/bin/bash
 
 gphoto2 \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
-    --trigger-capture \
+    --camera='Nikon DSC D850' --set-config shutterspeed=1/20 \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
