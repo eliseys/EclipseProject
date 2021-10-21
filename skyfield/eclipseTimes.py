@@ -3,14 +3,20 @@ import numpy as np
 from skyfield.api import load
 from skyfield.api import Topos
 import matplotlib.pyplot as plt
+from skyfield.searchlib import find_maxima, find_minima
 
+
+
+
+    earth, moon, sun = ephem['earth'], ephem['moon'], ephem['sun']
+    observer_location = earth + p  
 
 def center_angular_separation(t, p, ephem):
     #
     # separation between centers of the moon and the sun
     #
-    earth, moon, sun = ephem['earth'], ephem['moon'], ephem['sun']
-    observer_location = earth + p  
+
+    
     apparent_moon = observer_location.at(t).observe(moon)
     apparent_sun = observer_location.at(t).observe(sun)
 
@@ -23,23 +29,31 @@ def t_center(date, p, ephem, accuracy_s):
     step = 60
     span = np.arange(start, end+step, step)
         
-    while step >= accuracy_s:
-        t = load.timescale().utc(date.utc[0], date.utc[1], date.utc[2], 0, 0, span)
-        l = center_angular_separation(t, p, ephem)
-        t_center = t[np.argmin(l.radians)]
+    # while step >= accuracy_s:
+    #     t = load.timescale().utc(date.utc[0], date.utc[1], date.utc[2], 0, 0, span)
+    #     l = center_angular_separation(t, p, ephem)
+    #     t_center = t[np.argmin(l.radians)]
         
-        #print(t_center.utc)
+    #     #print(t_center.utc)
         
-        start = 3600*t_center.utc[3] + 60*t_center.utc[4] + t_center.utc[5] - step
-        end = 3600*t_center.utc[3] + 60*t_center.utc[4] + t_center.utc[5] + step
+    #     start = 3600*t_center.utc[3] + 60*t_center.utc[4] + t_center.utc[5] - step
+    #     end = 3600*t_center.utc[3] + 60*t_center.utc[4] + t_center.utc[5] + step
 
-        if step > 1:
-            step = step/60
-        elif step <= 1:
-            step = step/10
+    #     if step > 1:
+    #         step = step/60
+    #     elif step <= 1:
+    #         step = step/10
 
-        span = np.arange(start, end+step, step)
+    #     span = np.arange(start, end+step, step)
 
+    t = load.timescale().utc(2020)
+    #center_angular_separation.step_days = 1
+
+    
+    t1 = load.timescale().utc(2020)
+    t2 = load.timescale().utc(2021)
+    t_center, values = find_maxima(t1, t2, center_angular_separation(t, p, ephem))
+    
     return t_center
 
 
