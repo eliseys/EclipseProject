@@ -8,8 +8,8 @@ from skyfield.searchlib import find_maxima, find_minima
 
 
 
-    earth, moon, sun = ephem['earth'], ephem['moon'], ephem['sun']
-    observer_location = earth + p  
+earth, moon, sun = ephem['earth'], ephem['moon'], ephem['sun']
+observer_location = earth + p  
 
 def center_angular_separation(t, p, ephem):
     #
