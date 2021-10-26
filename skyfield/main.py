@@ -1,8 +1,7 @@
 import numpy as np
 import json
 
-from lmfit import minimize, Parameters, fit_report
-from scipy.optimize import Bounds, fmin
+from scipy.optimize import Bounds, fmin, fminbound
 
 from skyfield.api import load, Topos, wgs84
 
@@ -14,25 +13,16 @@ import matplotlib.pyplot as plt
 with open('ec.json', "r") as jf:
     ec = json.load(jf)
 
-# p = Topos(
-#     ec['gps']['latitude'],
-#     ec['gps']['longitude'],
-#     elevation_m = ec['gps']['elevation_m']
-# )
 
 p = wgs84.latlon(float(ec['gps']['latitude']), float(ec['gps']['longitude']), elevation_m = float(ec['gps']['elevation_m']))
 
-#p = wgs84.latlon(-22.19433, 113.99496, elevation_m = 222)
 
 ephem = load(ec['ephem'])
 
 print(p)
 
-r_moon = ec['r_moon_km']
-r_sun = ec['r_sun_km']
-
-#accuracy_s = ec['accuracy_s']
-
+moon_radius = ec['r_moon_km']
+sun_radius = ec['r_sun_km']
 
 earth, moon, sun = ephem['earth'], ephem['moon'], ephem['sun']
 observer_location = earth + p  
@@ -40,26 +30,19 @@ observer_location = earth + p
 
 #load.download('finals2000A.all')
 
-ts = load.timescale(builtin=False)
+# ts = load.timescale(builtin=False)
+
+ts = load.timescale()
+
 #ts = load.timescale()
 
 date = ts.utc(ec['date']['year'], ec['date']['month'], ec['date']['day'])
 
 
-
 def center_angular_separation(tau):
     # separation between centers of the moon and the sun
-    #print("start...", end="\r")
-    #print(tau[0], end="\r")
-    # t = ts.utc(date.utc.year, date.utc.month, date.utc.day, 0, 0, tau[0])
 
     t = ts.from_datetime(date.utc_datetime() + timedelta(seconds=tau[0]))
-    #t = date + timedelta(seconds=tau[0])
-
-    #print("t:", t, type(t))
-    
-    #print(t.utc_strftime('%Y-%m-%d %H:%M:')+'%2.4f' % t.utc.second, end="\r")
-    #print(t.utc_strftime('%Y-%m-%d %H:%M:')+'%2.4f' % t.utc.second)
 
     apparent_moon = observer_location.at(t).observe(moon).apparent()
     apparent_sun = observer_location.at(t).observe(sun).apparent()
@@ -70,22 +53,43 @@ def center_angular_separation(tau):
 
 
 
+tau_mid = fmin(center_angular_separation, x0=500, xtol=1e-6, disp=0)[0]
 
-#res = optimize.minimize(center_angular_separation, x0=500.0, method='nelder-mead', options={'xatol': 1e-8, 'disp': True})
-
-res = fmin(center_angular_separation, x0=500, xtol=1e-6)
-
-mid = ts.from_datetime(date.utc_datetime() + timedelta(seconds=res[0]))
+mid = ts.from_datetime(date.utc_datetime() + timedelta(seconds=tau_mid))
 
 
-# mid = ts.utc(date.utc.year, date.utc.month, date.utc.day, 0, 0, res[0])
 
-print(res)
-# print(mid.utc_strftime('%Y-%m-%d %H:%M:%S')+'%2.4f' % mid.utc.second, mid.delta_t)
+moon_distance = observer_location.at(mid) - moon.at(mid)
+sun_distance = observer_location.at(mid) - sun.at(mid)
 
-print(mid.utc_strftime('%Y-%m-%d') + ' ' + '{:0>2}:{:0>2}:{:0>2.6}'.format(mid.utc.hour, mid.utc.minute, mid.utc.second))
+moon_angular_radius = np.arctan(moon_radius/moon_distance.distance().km)
+sun_angular_radius = np.arctan(sun_radius/sun_distance.distance().km)
 
-print(mid.delta_t)
+delta_r = abs(moon_angular_radius - sun_angular_radius)
+
+
+def c2_separation(tau):
+
+    t = ts.from_datetime(date.utc_datetime() + timedelta(seconds=tau))
+
+    apparent_moon = observer_location.at(t).observe(moon).apparent()
+    apparent_sun = observer_location.at(t).observe(sun).apparent()
+
+    return abs(apparent_moon.separation_from(apparent_sun).radians - delta_r)
+
+
+
+tau_c2 = fminbound(c2_separation, 0, tau_mid, xtol=1e-6, disp=0)
+
+c2 = ts.from_datetime(date.utc_datetime() + timedelta(seconds=tau_c2))
+
+c3 = ts.from_datetime(date.utc_datetime() + timedelta(seconds=(tau_mid + (tau_mid - tau_c2))))
+
+
+
+print("C2", "\t", c2.utc_strftime('%Y-%m-%d') + ' ' + '{:0>2}:{:0>2}:{:04.1f}'.format(c2.utc.hour, c2.utc.minute, c2.utc.second))
+print("M", "\t", mid.utc_strftime('%Y-%m-%d') + ' ' + '{:0>2}:{:0>2}:{:04.1f}'.format(mid.utc.hour, mid.utc.minute, mid.utc.second))
+print("C3", "\t", c3.utc_strftime('%Y-%m-%d') + ' ' + '{:0>2}:{:0>2}:{:04.1f}'.format(c3.utc.hour, c3.utc.minute, c3.utc.second))
 
 
 
