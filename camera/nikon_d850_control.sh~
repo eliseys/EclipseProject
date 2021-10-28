@@ -1,0 +1,31 @@
+#!/bin/bash
+
+gphoto2 \
+    --set-config viewfinder=1 \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \
+    --trigger-capture \

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+gphoto2 \
+    --camera='Canon EOS 7D MarkII' --set-config viewfinder=1 \
+    --camera='Canon EOS 7D MarkII' --wait-event 500ms \
+    --camera='Canon EOS 7D MarkII' --set-config shutterspeed=2 \
+    --camera='Canon EOS 7D MarkII' --set-config eosremoterelease=5 \
+    --camera='Canon EOS 7D MarkII' --wait-event 4400ms \
+    --camera='Canon EOS 7D MarkII' --set-config manualfocusdrive="Far 2" \
+    --camera='Canon EOS 7D MarkII' --wait-event 500ms \
+    --camera='Canon EOS 7D MarkII' --set-config eosremoterelease=4 \
+    --camera='Canon EOS 7D MarkII' --wait-event 4400ms \
+    --camera='Canon EOS 7D MarkII' --set-config manualfocusdrive="Far 2" \
+    # --camera='Canon EOS 7D MarkII' --wait-event 500ms \
+    # --camera='Canon EOS 7D MarkII' --set-config shutterspeed=2 \
+    # --camera='Canon EOS 7D MarkII' --set-config eosremoterelease=4 \
+    # --camera='Canon EOS 7D MarkII' --wait-event 4400ms \
+    # --camera='Canon EOS 7D MarkII' --set-config manualfocusdrive="Far 2" \

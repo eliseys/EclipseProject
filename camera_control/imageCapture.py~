@@ -1,6 +1,0 @@
-from time import sleep
-from datetime import datetime
-from sh import gphoto2 as gp
-import signal, os, subprocess
-
-

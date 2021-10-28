@@ -1,0 +1,31 @@
+#!/bin/bash
+
+gphoto2 \
+    --camera='Nikon DSC D850' --set-config shutterspeed=1/20 \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
+    --camera='Nikon DSC D850' --trigger-capture \
