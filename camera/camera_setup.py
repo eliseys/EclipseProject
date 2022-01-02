@@ -31,9 +31,13 @@ gp("--camera", "Canon EOS 7D MarkII", "--set-config", "whitebalance=Daylight") #
 print(gp("--camera", "Canon EOS 7D MarkII", "--get-config", "whitebalance"))
 
 # capturesettings
+try:
+    print(gp("--camera", "Canon EOS 7D MarkII", "--get-config", "exposurecompensation"))
+except:
+    AttributeError
+    
 
-print(gp("--camera", "Canon EOS 7D MarkII", "--get-config", "exposurecompensation"))
-
+    
 gp("--camera", "Canon EOS 7D MarkII", "--set-config", "highisonr=2") # High ISO Noise Reduction (2=off)
 print(gp("--camera", "Canon EOS 7D MarkII", "--get-config", "highisonr"))
 
