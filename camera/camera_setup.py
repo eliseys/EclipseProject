@@ -12,7 +12,6 @@ print(gp("--auto-detect"))
 
 # Capture Target Memory card
 # save files to internal memory card
-
 gp("--camera", "Canon EOS 7D MarkII", "--set-config", "capturetarget=1") 
 print(gp("--get-config", "capturetarget"))
 
@@ -31,10 +30,12 @@ gp("--camera", "Canon EOS 7D MarkII", "--set-config", "whitebalance=Daylight") #
 print(gp("--camera", "Canon EOS 7D MarkII", "--get-config", "whitebalance"))
 
 # capturesettings
+
+
 try:
     print(gp("--camera", "Canon EOS 7D MarkII", "--get-config", "exposurecompensation"))
-except:
-    AttributeError
+except AttributeError:
+    print("exposurecompensation have not set")
     
 
     

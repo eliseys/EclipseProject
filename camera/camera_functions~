@@ -1,0 +1,158 @@
+#!/bin/bash
+
+
+function SETUP {
+    #
+    # setup camera settings 
+    #
+
+    # to be done
+
+    echo 0
+    
+    }
+
+
+function BURST {
+    #
+    # runs continuous shooting in the interval T1-T2
+    #
+    local T1=$1
+    local T2=$2
+    local SHUTTER_SPEED=$3
+
+    #gphoto2 --set-config aeb=0
+    #gphoto2 --set-config shutterspeed='$SHUTTER_SPEED'
+
+    NOW=$(date +%s.%N)
+    WAIT=$(echo "($T1 - $NOW)" | bc -l)
+
+    	    BRACKET_DURATION=0
+    #echo $WAIT "wait"
+    
+    if (( $(echo "$WAIT > 0" | bc -l) ));
+    then
+	sleep $WAIT
+    else
+	sleep 0
+    fi
+
+    NOW=$(date +%s.%N)
+    BURST_DURATION=$(echo "($T2 - $NOW)" | bc -l)
+
+    #echo $BURST_DURATION "burst duration"
+    
+    if (( $(echo "$BURST_DURATION > 0" | bc -l) ));
+    then
+	echo "$(date -Is)" "burst started"
+	sleep $BURST_DURATION
+	#gphoto2 --set-config eosremoterelease=5 --wait-event $(BURST_DURATION)ms --set-config eosremoterelease=4
+	echo "$(date -Is)" "burst ended"
+    else
+	echo "$(date -Is)" "burst started"
+	sleep 0
+	echo "$(date -Is)" "burst ended"
+    fi
+
+}
+
+
+function AEB {
+    #
+    # runs Auto Exposure Bracketing sequences continuously in the interval T1-T1 
+    #
+    local T1=$1
+    local T2=$2
+    local MID_SHUTTER_SPEED=$3
+    local STEP=$4
+
+    local N=$5
+    #
+    # Number of frames in bracketed sequence. N depends on camera model 
+    # 
+
+    local FPS=$6
+    #
+    # Frames Per Second rate in continious shooting mode.
+    # Usually, FPS can be found in Users's manual for camera.
+    # Otherwise, FPS should be measured experimentally.
+    #
+
+    local MODE=$7
+    #
+    # LTC: Let To Complete bracket sequence if remaining time (T2-NOW) less than BRACKET_DURATION.
+    #
+    # ROT: Right On Time. Capture completes if remaining time (T2-NOW) less than BRACKET_DURATION.
+    #
+    # BRACKET_DURATION equals ESTIMATED_BRACKET_DURATION before first bracket. During first bracket
+    # and following real BRACKET_DURATION value measured.
+    #  
+    
+    if [ "$MODE" != "LTC" ] && [ "$MODE" != "ROT" ];
+    then
+        echo "WARNING! MODE="$MODE" Parameter MODE must be either ROT or LTC. The parameter is automatically set to ROT."
+	MODE="ROT"
+    fi
+
+
+    n=$(( $N/2 ))
+    local MAX_SHUTTER_SPEED=$(echo "$MID_SHUTTER_SPEED*e($STEP*$n*l(2))" | bc -l) 
+
+    local ESTIMATED_BRACKET_DURATION_MS=$(echo "(($MAX_SHUTTER_SPEED*(1 - (1/e($STEP*l(2)))^$N))/(1 - 1/e($STEP*l(2))) + $N/$FPS)*1000" | bc -l | awk '{print ($0-int($0)>0)?int($0)+1:int($0)}')
+
+    local ESTIMATED_BRACKET_DURATION=$(echo "$ESTIMATED_BRACKET_DURATION_MS/1000" | bc -l)
+
+    #gphoto2 --set-config aeb=$STEP
+    #gphoto2 --set-config shutterspeed='$MID_SHUTTER_SPEED'
+
+    NOW=$(date +%s.%N)
+    WAIT=$(echo "($T1 - $NOW)" | bc -l)
+
+    echo $WAIT
+    
+    if (( $(echo "$WAIT > 0" | bc -l) ));
+    then
+	sleep $WAIT
+    else
+	sleep 0
+    fi
+
+    NOW=$(date +%s.%N)
+    LEFTOVER=$(echo "$T2 - $NOW" | bc -l)
+
+    if [ "$MODE" = "ROT" ];
+    then
+    	BRACKET_DURATION=$ESTIMATED_BRACKET_DURATION
+    elif [ "$MODE" = "LTC" ];
+    then
+    	BRACKET_DURATION=0
+    fi
+
+    BRACKET_DURATION=0
+
+    while (( $(echo "$LEFTOVER > $BRACKET_DURATION" | bc -l) ))
+    do
+    	echo $(date -Is) "AEB" $ESTIMATED_BRACKET_DURATION $BRACKET_DURATION $LEFTOVER
+	echo $(echo "$LEFTOVER > $BRACKET_DURATION" | bc -l)
+	
+	
+	BRACKET_DURATION_T1=$(date +%s.%N)
+	sleep $ESTIMATED_BRACKET_DURATION
+	sleep 0.1
+    	#gphoto2 --set-config eosremoterelease=5 --wait-event $(ESTIMATED_BRACKET_DURATION_MS)ms --set-config eosremoterelease=4
+	BRACKET_DURATION_T2=$(date +%s.%N)
+
+	if [ "$MODE" = "ROT" ];
+	then
+	    BRACKET_DURATION=$(echo "$BRACKET_DURATION_T2 - $BRACKET_DURATION_T1" | bc -l)
+	elif [ "$MODE" = "LTC" ];
+	then
+    	    BRACKET_DURATION=0
+	fi
+	
+	NOW=$(date +%s.%N)
+    	LEFTOVER=$(echo "$T2 - $NOW" | bc -l)
+    done
+
+}
+
