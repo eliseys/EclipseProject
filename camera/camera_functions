@@ -45,8 +45,18 @@ function BURST {
     if (( $(echo "$BURST_DURATION > 0" | bc -l) ));
     then
 	echo "$(date -Ins)" "burst started"
-	sleep $BURST_DURATION
-	#gphoto2 --set-config eosremoterelease=5 --wait-event $(BURST_DURATION)ms --set-config eosremoterelease=4
+
+	if [[ $DRY_RUN -eq 1 ]];
+	then
+	    sleep $BURST_DURATION
+	elif [[ $DRY_RUN -eq 0 ]];
+	then
+	    # this line is camera-dependent
+	    # following is for Canon
+	    gphoto2 --set-config eosremoterelease=5 --wait-event $(BURST_DURATION)ms --set-config eosremoterelease=4
+	fi
+
+
 	echo "$(date -Ins)" "burst ended"
     else
 	echo "$(date -Ins)" "burst started"
@@ -107,6 +117,7 @@ function AEB {
     # BRACKET_DURATION equals ESTIMATED_BRACKET_DURATION before first bracket. During first bracket
     # and following real BRACKET_DURATION value measured.
     #  
+
     
     if [ "$MODE" != "LTC" ] && [ "$MODE" != "ROT" ];
     then
@@ -121,9 +132,18 @@ function AEB {
 
     local ESTIMATED_BRACKET_DURATION=$(echo "$ESTIMATED_BRACKET_DURATION_MS/1000" | bc -l)
 
-    #gphoto2 --set-config aeb=$STEP
-    #gphoto2 --set-config shutterspeed='$MID_SHUTTER_SPEED'
 
+    if [[ $DRY_RUN -eq 1 ]];
+    then
+	:
+    elif [[ $DRY_RUN -eq 0 ]];
+    then
+	# these lines is camera-dependent
+	# following is for Canon
+	gphoto2 --set-config aeb=$STEP
+	gphoto2 --set-config shutterspeed='$MID_SHUTTER_SPEED'
+    fi
+    
     NOW=$(date +%s.%N)
     WAIT=$(echo "($T1 - $NOW)" | bc -l)
 
@@ -155,9 +175,15 @@ function AEB {
 	
 	BRACKET_DURATION_T1=$(date +%s.%N)
 
-	sleep $ESTIMATED_BRACKET_DURATION
-	sleep 0.1
-    	#gphoto2 --set-config eosremoterelease=5 --wait-event $(ESTIMATED_BRACKET_DURATION_MS)ms --set-config eosremoterelease=4
+	if [[ $DRY_RUN -eq 1 ]];
+	then
+	    sleep $ESTIMATED_BRACKET_DURATION
+	elif [[ $DRY_RUN -eq 0 ]];
+	then
+	    # this line is camera-dependent
+	    # following is for Canon
+	    gphoto2 --set-config eosremoterelease=5 --wait-event "$(ESTIMATED_BRACKET_DURATION_MS)"ms --set-config eosremoterelease=4
+	fi
 
 	BRACKET_DURATION_T2=$(date +%s.%N)
 

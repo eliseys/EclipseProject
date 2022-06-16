@@ -1,10 +1,14 @@
 #!/bin/bash
 . ./camera_functions
 
+# run script without camera
+DRY_RUN=1
 
 OUTER_OFFSET=5
 INNER_OFFSET=10
 TOTALITY_DURATION=50
+
+
 
 #test
 C2=$(echo "($(date +%s.%N) + $OUTER_OFFSET)" | bc -l)
