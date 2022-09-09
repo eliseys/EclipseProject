@@ -1,11 +1,29 @@
-## camera
- 
+## EclipseProject/camera
+
+
+<---!
+`camera_functions` library completely written in `Bash` 
+-->
+
+
+
+<---!
+### Solar corona photography during total solar eclipse
+
+Total solar eclipse is an astronomical event during which the Sun's photosphere completely covered by the Moon.
+
+for the particular plase on the Earth's surface --- the Moon's shadow.  
+-->
+
+
+### Dependencies
+1. `gPhoto2`
 
 ### `camera_functions`
 Library containing functions for camera control. All functions are described below. 
 
 #### `SETUP`
-Setting camera parameters up. TBD
+Setting camera parameters up before totality. TBD
 
 #### `BURST`
 Runs continuous shooting in the time interval `T1`--`T2`.  

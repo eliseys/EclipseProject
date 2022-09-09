@@ -13,6 +13,68 @@ function SETUP {
     }
 
 
+
+function INTERVAL {
+    local T1=$1
+    local T2=$2
+    local INTERVAL_SECONDS=$3
+
+    
+    NOW=$(date +%s.%N)
+    WAIT=$(echo "($T1 - $NOW)" | bc -l)
+
+    if (( $(echo "$WAIT > 0" | bc -l) ));
+    then
+	echo "Sleep for $WAIT seconds..." 
+	sleep $WAIT
+    else
+	sleep 0
+    fi
+
+    NOW=$(date +%s.%N)
+    LEFTOVER=$(echo "($T2 - $NOW)" | bc -l)
+
+    echo "$(date -Ins)" "Interval started"
+    
+    while (( $(echo "$LEFTOVER > 0" | bc -l) ))
+    do
+
+	CAPTURE_DURATION_T1=$(date +%s.%N)
+
+	if [[ $DRY_RUN -eq 1 ]];
+	then
+	    echo "Capture" "$(date -Ins)"
+	    sleep 2.3
+	elif [[ $DRY_RUN -eq 0 ]];
+	then
+	    # this line is camera-dependent
+	    # following is for Canon
+	    gphoto2 --capture-image
+	fi
+
+	CAPTURE_DURATION_T2=$(date +%s.%N)
+
+
+    	CAPTURE_DURATION=$(echo "$CAPTURE_DURATION_T2 - $CAPTURE_DURATION_T1" | bc -l)
+
+	INTERVAL_LEFTOVER=$(echo "$INTERVAL_SECONDS - $CAPTURE_DURATION" | bc -l)
+	
+	if (( $(echo "$INTERVAL_LEFTOVER > 0" | bc -l) ));
+	then
+	    sleep $INTERVAL_LEFTOVER
+	else
+	    sleep 0
+	fi
+	
+	NOW=$(date +%s.%N)
+	LEFTOVER=$(echo "($T2 - $NOW)" | bc -l)
+	
+
+    done
+
+    echo "$(date -Ins)" "Interval ended"
+    }
+
 function BURST {
     #
     # runs continuous shooting in the interval T1-T2
@@ -21,13 +83,13 @@ function BURST {
     local T2=$2
     local SHUTTER_SPEED=$3
 
-    #gphoto2 --set-config aeb=0
-    #gphoto2 --set-config shutterspeed='$SHUTTER_SPEED'
+    gphoto2 --set-config aeb="0"
+    gphoto2 --set-config shutterspeed="$SHUTTER_SPEED"
 
     NOW=$(date +%s.%N)
     WAIT=$(echo "($T1 - $NOW)" | bc -l)
 
-    	    BRACKET_DURATION=0
+    BRACKET_DURATION=0
     #echo $WAIT "wait"
     
     if (( $(echo "$WAIT > 0" | bc -l) ));
@@ -40,7 +102,10 @@ function BURST {
     NOW=$(date +%s.%N)
     BURST_DURATION=$(echo "($T2 - $NOW)" | bc -l)
 
-    #echo $BURST_DURATION "burst duration"
+    BURST_DURATION_MS=$(echo "($BURST_DURATION*1000)" | bc -l)
+    
+    
+    echo $BURST_DURATION "burst duration"
     
     if (( $(echo "$BURST_DURATION > 0" | bc -l) ));
     then
@@ -53,7 +118,7 @@ function BURST {
 	then
 	    # this line is camera-dependent
 	    # following is for Canon
-	    gphoto2 --set-config eosremoterelease=5 --wait-event $(BURST_DURATION)ms --set-config eosremoterelease=4
+	    gphoto2 --set-config eosremoterelease=5 --wait-event "$BURST_DURATION_MS"ms --set-config eosremoterelease=4 > /dev/null 2>&1
 	fi
 
 
@@ -119,11 +184,11 @@ function AEB {
     #  
 
     
-    if [ "$MODE" != "LTC" ] && [ "$MODE" != "ROT" ];
-    then
-        echo "WARNING! MODE="$MODE" Parameter MODE must be either ROT or LTC. The parameter is automatically set to ROT."
-	MODE="ROT"
-    fi 
+    #if [[ [ "$MODE" != "LTC" ] && [ "$MODE" != "ROT" ] ]];
+    #then
+    #    echo "WARNING! MODE="$MODE" Parameter MODE must be either ROT or LTC. The parameter is automatically set to ROT."
+    #	MODE="ROT"
+    #fi 
 
     n=$(( $N/2 ))
     local MAX_SHUTTER_SPEED=$(echo "$MID_SHUTTER_SPEED*e($STEP*$n*l(2))" | bc -l) 
@@ -140,14 +205,16 @@ function AEB {
     then
 	# these lines is camera-dependent
 	# following is for Canon
-	gphoto2 --set-config aeb=$STEP
-	gphoto2 --set-config shutterspeed='$MID_SHUTTER_SPEED'
+
+	#gphoto2 --set-config aeb="$STEP"
+	gphoto2 --set-config aeb=3
+	gphoto2 --set-config shutterspeed="$MID_SHUTTER_SPEED"
     fi
     
     NOW=$(date +%s.%N)
     WAIT=$(echo "($T1 - $NOW)" | bc -l)
 
-    echo $WAIT
+    #echo $WAIT
     
     if (( $(echo "$WAIT > 0" | bc -l) ));
     then
@@ -182,7 +249,7 @@ function AEB {
 	then
 	    # this line is camera-dependent
 	    # following is for Canon
-	    gphoto2 --set-config eosremoterelease=5 --wait-event "$(ESTIMATED_BRACKET_DURATION_MS)"ms --set-config eosremoterelease=4
+	    gphoto2 --set-config eosremoterelease=5 --wait-event "$ESTIMATED_BRACKET_DURATION_MS"ms --set-config eosremoterelease=4 > /dev/null 2>&1
 	fi
 
 	BRACKET_DURATION_T2=$(date +%s.%N)
@@ -200,4 +267,5 @@ function AEB {
     done
 
 }
+
 
